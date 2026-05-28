@@ -72,6 +72,7 @@ app.post('/cart/:userId/add', async (req, res) => {
             if (!response.ok) throw new Error('Product not found');
             product = await response.json();
         } catch (err) {
+            console.error(`Catalogue lookup failed for product ${productId}:`, err.message);
             return res.status(400).json({ error: 'Product not found in catalogue' });
         }
 
