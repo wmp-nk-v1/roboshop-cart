@@ -21,7 +21,8 @@ argocd-deploy:
 		--path . \
 		--dest-server https://kubernetes.default.svc \
 		--dest-namespace roboshop \
-		--helm-set services.cart.tag=$(image_tag) \
+		--sync-option CreateNamespace=true \
+		--helm-set image_tag=$(image_tag) \
 		--values values/roboshop-cart.yml
 
 clean:
