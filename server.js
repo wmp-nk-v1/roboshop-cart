@@ -1,10 +1,12 @@
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
 const { createClient } = require('redis');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(morgan('{"time":":date[iso]","method":":method","path":":url","status"::status,"latency_ms"::response-time,"bytes"::res[content-length]}'));
 
 const REDIS_HOST = process.env.REDIS_HOST || 'redis';
 const CATALOGUE_URL = process.env.CATALOGUE_URL || 'http://catalogue:8002';
